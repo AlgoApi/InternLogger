@@ -1,0 +1,13 @@
+init_testing
+debug:log1
+info:log2
+warn:log3
+error:log4
+critical:log5
+not_log_type:log6
+:log7
+$set_default:debug
+debug:debug_check1
+$set_default:error
+warn:warn_check
+error:error_check

@@ -1,0 +1,9 @@
+[INFO] init_testing
+[INFO] log2
+[WARN] log3
+[ERROR] log4
+[CRITICAL] log5
+[INFO] log6
+[INFO] log7
+[DEBUG] debug_check1
+[ERROR] error_check
