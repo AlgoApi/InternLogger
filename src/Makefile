@@ -13,7 +13,7 @@ EXECUTABLE = main
 
 TEST_ARGS = ../materials/test_output.txt info < ../materials/test_input.txt
 
-.PHONY: all all_lint all_test clean_all rebuild directories check logger_so sanitize valgrind only_main only_test_main
+.PHONY: all all_lint all_test clean_all rebuild directories check logger_so mainframe_o sanitize valgrind
 
 all: directories main
 
@@ -42,13 +42,7 @@ logger_so: logger_o
 main: mainframe_o logger_so
 	$(C) $(OBJ_DIR)/mainframe.o -L$(LIB_DIR) -llogger $(SAN_FLAGS) -o $(BIN_DIR)/$(EXECUTABLE)
 
-only_main: mainframe_o
-	$(C) $(OBJ_DIR)/mainframe.o -L$(LIB_DIR) -llogger $(SAN_FLAGS) -o $(BIN_DIR)/$(EXECUTABLE)
-
 test_main: test_mainframe_o logger_so
-	$(C) $(OBJ_DIR)/mainframe.o -L$(LIB_DIR) -llogger $(SAN_FLAGS) -o $(BIN_DIR)/$(EXECUTABLE)_test
-
-only_test_main: test_mainframe_o logger_so
 	$(C) $(OBJ_DIR)/mainframe.o -L$(LIB_DIR) -llogger $(SAN_FLAGS) -o $(BIN_DIR)/$(EXECUTABLE)_test
 
 # ---------- Sanitizes ----------
@@ -96,9 +90,9 @@ valgrind: clean_all all
 	- valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file="valgrind.log" ../build/bin/$(EXECUTABLE) $(TEST_ARGS)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)/*
 
 rebuild: clean_all all
 
 clean_all:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR)
+	rm -rf $(OBJ_DIR)/* $(LIB_DIR)/* $(BIN_DIR)/*
