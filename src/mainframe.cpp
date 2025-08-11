@@ -127,11 +127,11 @@ void compare_files(const std::string& expected_file, const std::string& actual_f
         act_ok = s21_getline(act_fs, act_line);
     }
 
-    if (act_fs.is_open()){
+    if (act_fs.is_open()) {
         act_fs.close();
     }
 
-    if (exp_fs.is_open()){
+    if (exp_fs.is_open()) {
         exp_fs.close();
     }
 
@@ -217,29 +217,29 @@ void input_loop(std::queue<LogEntry>& queue, std::mutex& mtx, std::condition_var
  * @brief MAIN FRAME.
  *
  * Guaranteeing minimum 2 console arguments, handling cases:
- * 
+ *
  * - incorrect logging level string
- * 
+ *
  * - incorrect path to the file or logging file itself.
- * 
+ *
  * Initializing the logger, queue, and auxiliary objects.
- * 
+ *
  * All paths must be specified relative to the program launch directory.
  * @note When defining TEST_H, testing of the expected (3 console argument)
  * and current output is started.
  *
  * If you want to try the test, set the redirect "<" after the console arguments
  * to the path to the console input: "../../materials/test_input.txt".
- * 
- * Try it: in build/bin directory run this command(bash): 
- * ./main ../../materials/test_output.txt info 
+ *
+ * Try it: in build/bin directory run this command(bash):
+ * ./main ../../materials/test_output.txt info
  * ../../materials/test_expected.txt < ../../materials/test_input.txt
  * make sure materials/test_output.txt is empty
- * 
+ *
  *
  * @param[in] argc count of console arguments.
- * @param[in] argv array of string console arguments. 
- * argv[1] - path to log file, argv[2] - log level/type, 
+ * @param[in] argv array of string console arguments.
+ * argv[1] - path to log file, argv[2] - log level/type,
  * if defined TEST_H - argv[3] - expected file path
  *
  * @return the result of the entire program
